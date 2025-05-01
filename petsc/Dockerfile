@@ -1,6 +1,6 @@
-FROM debian:stable
+FROM debian:bookworm
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y \
 		build-essential \
 		gfortran \
 		python3 \
@@ -16,8 +16,8 @@ ENV PETSC_ARCH=arch-linux-c-noncomplex-debug
 
 RUN git clone -b release https://gitlab.com/petsc/petsc.git ${PETSC_DIR} &&\
     cd ${PETSC_DIR} &&\
-    git pull &&\
-    git checkout v3.23.1
+    git pull && \
+    git checkout v3.23.0
 
 RUN cd ${PETSC_DIR} && \
 		./configure PETSC_ARCH=${PETSC_ARCH} --with-cc=gcc \
